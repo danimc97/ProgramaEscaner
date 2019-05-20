@@ -44,6 +44,7 @@ public class GestionEscaner extends JPanel {
 	private JTextField textField_IP;
 	JRadioButton rdbtnNo;
 	JRadioButton rdbtnSi;
+	JButton btnEjecutar;
 	
 
 	public GestionEscaner() {
@@ -54,7 +55,7 @@ public class GestionEscaner extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblIntroduceLaIp = new JLabel("Introduce la ip de la máquina del cliente:");
+		JLabel lblIntroduceLaIp = new JLabel("Introduce la ip de la mï¿½quina del cliente:");
 		GridBagConstraints gbc_lblIntroduceLaIp = new GridBagConstraints();
 		gbc_lblIntroduceLaIp.anchor = GridBagConstraints.EAST;
 		gbc_lblIntroduceLaIp.insets = new Insets(0, 0, 5, 5);
@@ -209,7 +210,8 @@ public class GestionEscaner extends JPanel {
 			}
 		});
 		
-		JButton btnEjecutar = new JButton("Ejecutar");
+		btnEjecutar = new JButton("Ejecutar");
+		btnEjecutar.setEnabled(false);
 		GridBagConstraints gbc_btnEjecutar = new GridBagConstraints();
 		gbc_btnEjecutar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEjecutar.gridx = 1;
@@ -224,10 +226,10 @@ public class GestionEscaner extends JPanel {
 				try {
 					if(!ruta.equals("\\tarea.bat") && !ruta.equals("")) {
 						aplicacion.exec("cmd /c start "+archivoTarea);
-						JOptionPane.showMessageDialog(null, "La ejecución se realizó con éxito");
+						JOptionPane.showMessageDialog(null, "La ejecuciï¿½n se realizï¿½ con ï¿½xito");
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo "+(char)34+"tarea.bat"+(char)34+" revise la configuración");
+						JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo "+(char)34+"tarea.bat"+(char)34+" revise la configuraciï¿½n");
 					}
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(null, "No se ha podido ejecutar la tarea. Si el problema persiste, contacte con el administrador");
@@ -248,7 +250,7 @@ public class GestionEscaner extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String respuestas[] = new String[] {"Si", "No"};
 				int opcionElegida = JOptionPane.showOptionDialog(null, 
-						"¿Desea guardar los cambios?", "Guardar registros", 
+						"ï¿½Desea guardar los cambios?", "Guardar registros", 
 				        JOptionPane.OK_CANCEL_OPTION, 
 				        JOptionPane.OK_CANCEL_OPTION, 
 				        CacheImagenes.getCacheImagenes().getIcono("confirm.png"), 
@@ -269,6 +271,8 @@ public class GestionEscaner extends JPanel {
 					
 					if(funciona==3) {
 						JOptionPane.showMessageDialog(null, "Guardado correcto");
+						btnEjecutar.setEnabled(true);
+						
 					}
 				}
 			}
@@ -312,7 +316,7 @@ public class GestionEscaner extends JPanel {
 						funciona++;
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "El campo ip no puede estar vacío");
+						JOptionPane.showMessageDialog(null, "El campo ip no puede estar vacï¿½o");
 					}
 				}
 				
@@ -320,7 +324,7 @@ public class GestionEscaner extends JPanel {
 			else {
 				
 				if(ruta.equals("\\revisor.bat")) {
-					JOptionPane.showMessageDialog(null, "No se ha encontrado el directorio para el archivo "+(char)34+"revisor.bat"+(char)34+" revise la configuración");
+					JOptionPane.showMessageDialog(null, "No se ha encontrado el directorio para el archivo "+(char)34+"revisor.bat"+(char)34+" revise la configuraciï¿½n");
 				}
 				else {
 					if(rutaOrigen.equals("")) {
@@ -362,7 +366,7 @@ public class GestionEscaner extends JPanel {
 				funciona++;
 			}
 			else {				
-				JOptionPane.showMessageDialog(null, "No se ha encontrado el directorio para el archivo "+(char)34+"cnfg.vbs"+(char)34+" revise la configuración");
+				JOptionPane.showMessageDialog(null, "No se ha encontrado el directorio para el archivo "+(char)34+"cnfg.vbs"+(char)34+" revise la configuraciï¿½n");
 			}
 			
 		} catch (IOException e) {
@@ -395,7 +399,7 @@ public class GestionEscaner extends JPanel {
 				funciona++;
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "No se ha encontrado el directorio para el archivo "+(char)34+"tarea.bat"+(char)34+" revise la configuración");
+				JOptionPane.showMessageDialog(null, "No se ha encontrado el directorio para el archivo "+(char)34+"tarea.bat"+(char)34+" revise la configuraciï¿½n");
 			}
 			
 		} catch (IOException e) {
