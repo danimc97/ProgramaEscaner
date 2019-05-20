@@ -162,6 +162,7 @@ public class GestionEscaner extends JPanel {
 		gbc_textField_Origen.gridy = 5;
 		add(textField_Origen, gbc_textField_Origen);
 		textField_Origen.setColumns(10);
+		textField_Origen.setText("\\");
 		
 		JButton btnSeleccionarO = new JButton("Seleccionar...");
 		GridBagConstraints gbc_btnSeleccionarO = new GridBagConstraints();
