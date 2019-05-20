@@ -26,7 +26,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		int anchoPantalla = tamanoPantalla.width;
 		
-		setSize(anchoPantalla/2, alturaPantalla/3);
+		setSize(anchoPantalla/2, alturaPantalla/2);
 		
 		setLocation(anchoPantalla/4, alturaPantalla/4);
 		

@@ -50,12 +50,12 @@ public class GestionEscaner extends JPanel {
 	public GestionEscaner() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{39, 0, 0, 0, 36, 0};
-		gridBagLayout.rowHeights = new int[]{38, 28, 0, 31, 0, 0, 0, 31, 0};
+		gridBagLayout.rowHeights = new int[]{38, 28, 0, 31, 0, 0, 0, 42, 37, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblIntroduceLaIp = new JLabel("Introduce la ip de la mï¿½quina del cliente:");
+		JLabel lblIntroduceLaIp = new JLabel("Introduce la ip de la máquina del cliente:");
 		GridBagConstraints gbc_lblIntroduceLaIp = new GridBagConstraints();
 		gbc_lblIntroduceLaIp.anchor = GridBagConstraints.EAST;
 		gbc_lblIntroduceLaIp.insets = new Insets(0, 0, 5, 5);
@@ -131,6 +131,7 @@ public class GestionEscaner extends JPanel {
 		});
 		
 		rdbtnNo = new JRadioButton("No");
+		rdbtnNo.setSelected(true);
 		GridBagConstraints gbc_rdbtnNo = new GridBagConstraints();
 		gbc_rdbtnNo.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnNo.gridx = 3;
@@ -216,7 +217,7 @@ public class GestionEscaner extends JPanel {
 		GridBagConstraints gbc_btnEjecutar = new GridBagConstraints();
 		gbc_btnEjecutar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEjecutar.gridx = 1;
-		gbc_btnEjecutar.gridy = 7;
+		gbc_btnEjecutar.gridy = 8;
 		add(btnEjecutar, gbc_btnEjecutar);
 		btnEjecutar.addActionListener(new ActionListener() {
 			
@@ -227,10 +228,10 @@ public class GestionEscaner extends JPanel {
 				try {
 					if(!ruta.equals("\\tarea.bat") && !ruta.equals("")) {
 						aplicacion.exec("cmd /c start "+archivoTarea);
-						JOptionPane.showMessageDialog(null, "La ejecuciï¿½n se realizï¿½ con ï¿½xito");
+						JOptionPane.showMessageDialog(null, "Tarea ejecutada.");
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo "+(char)34+"tarea.bat"+(char)34+" revise la configuraciï¿½n");
+						JOptionPane.showMessageDialog(null, "No se ha encontrado la tarea. Revise la configuración");
 					}
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(null, "No se ha podido ejecutar la tarea. Si el problema persiste, contacte con el administrador");
@@ -243,7 +244,7 @@ public class GestionEscaner extends JPanel {
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnGuardar.gridx = 2;
-		gbc_btnGuardar.gridy = 7;
+		gbc_btnGuardar.gridy = 8;
 		add(btnGuardar, gbc_btnGuardar);
 		btnGuardar.addActionListener(new ActionListener() {
 			
@@ -251,7 +252,7 @@ public class GestionEscaner extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String respuestas[] = new String[] {"Si", "No"};
 				int opcionElegida = JOptionPane.showOptionDialog(null, 
-						"ï¿½Desea guardar los cambios?", "Guardar registros", 
+						"¿Desea guardar los cambios?", "Guardar registros", 
 				        JOptionPane.OK_CANCEL_OPTION, 
 				        JOptionPane.OK_CANCEL_OPTION, 
 				        CacheImagenes.getCacheImagenes().getIcono("confirm.png"), 
@@ -295,7 +296,7 @@ public class GestionEscaner extends JPanel {
 					bw.write("@echo off\r\n" +
 							"\r\n" + 
 							"\r\n" + 
-							"forfiles /p "+this.rutaOrigen+" /S /M *.txt /c \"cmd /c move @file "+this.rutaDestino+(char)34+"\r\n" + 
+							"forfiles /p "+this.rutaOrigen+" /S /M *.pdf /c \"cmd /c move @file "+this.rutaDestino+(char)34+"\r\n" + 
 							"\r\n" + 
 							"exit");
 					bw.close();
@@ -317,7 +318,7 @@ public class GestionEscaner extends JPanel {
 						funciona++;
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "El campo ip no puede estar vacï¿½o");
+						JOptionPane.showMessageDialog(null, "El campo ip no puede estar vacío");
 					}
 				}
 				
@@ -325,7 +326,7 @@ public class GestionEscaner extends JPanel {
 			else {
 				
 				if(ruta.equals("\\revisor.bat")) {
-					JOptionPane.showMessageDialog(null, "No se ha encontrado el directorio para el archivo "+(char)34+"revisor.bat"+(char)34+" revise la configuraciï¿½n");
+					JOptionPane.showMessageDialog(null, "Directorio de los archivos no especificado");
 				}
 				else {
 					if(rutaOrigen.equals("")) {
@@ -341,7 +342,7 @@ public class GestionEscaner extends JPanel {
 				}
 			}
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "No se ha podido crear "+(char)34+"revisor.bat"+(char)34+". Permisos insuficientes");
+			JOptionPane.showMessageDialog(null, "No se han podido crear los archivos. Permisos insuficientes");
 //			e.printStackTrace();
 		}
 		
@@ -367,11 +368,11 @@ public class GestionEscaner extends JPanel {
 				funciona++;
 			}
 			else {				
-				JOptionPane.showMessageDialog(null, "No se ha encontrado el directorio para el archivo "+(char)34+"cnfg.vbs"+(char)34+" revise la configuraciï¿½n");
+				JOptionPane.showMessageDialog(null, "Directorio de los archivos no especificado");
 			}
 			
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "No se ha podido crear "+(char)34+"cnfg.vbs"+(char)34+". Permisos insuficientes");
+			JOptionPane.showMessageDialog(null, "No se han podido crear los archivos. Permisos insuficientes");
 //			e.printStackTrace();
 		}
 		
@@ -400,11 +401,11 @@ public class GestionEscaner extends JPanel {
 				funciona++;
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "No se ha encontrado el directorio para el archivo "+(char)34+"tarea.bat"+(char)34+" revise la configuraciï¿½n");
+				JOptionPane.showMessageDialog(null, "Directorio de los archivos no especificado");
 			}
 			
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "No se ha podido crear "+(char)34+"tarea.bat"+(char)34+". Permisos insuficientes");
+			JOptionPane.showMessageDialog(null, "No se han podido crear los archivos. Permisos insuficientes");
 //			e.printStackTrace();
 		}
 		
