@@ -12,9 +12,11 @@ public class VentanaPrincipal extends JFrame {
 
 	public static VentanaPrincipal instancia=null;
 	
-	public VentanaPrincipal() {
+	public VentanaPrincipal() {		
 		
-		this.add(new GestionEscaner());
+		this.setJMenuBar(new Menu());
+		
+		this.add(new GestionEscaner());		
 		
 		this.setIconImage(CacheImagenes.getCacheImagenes().getImagen("canon.png"));
 		
@@ -36,7 +38,8 @@ public class VentanaPrincipal extends JFrame {
 		
 		setTitle("Gestión de escáner");
 		
-		setResizable(false);
+		setResizable(true);
+		
 				
 	}
 	

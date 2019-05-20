@@ -1,14 +1,23 @@
 package gui;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -16,11 +25,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.text.DefaultEditorKit;
 
 import utils.CacheImagenes;
 
 import javax.security.auth.callback.TextInputCallback;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -45,9 +57,15 @@ public class GestionEscaner extends JPanel {
 	JRadioButton rdbtnNo;
 	JRadioButton rdbtnSi;
 	JButton btnEjecutar;
+	JPopupMenu popup = getPopUpMenu();
+	Action copiar;
+	Action pegar;
+	Action cortar;
 	
 
 	public GestionEscaner() {
+		
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{39, 0, 0, 0, 36, 0};
 		gridBagLayout.rowHeights = new int[]{38, 28, 0, 31, 0, 0, 0, 42, 37, 0};
@@ -240,6 +258,87 @@ public class GestionEscaner extends JPanel {
 			}
 		});
 		
+		
+		textField_Destino.addMouseListener(new MouseAdapter() {
+			 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                showPopup(e);
+            }
+ 
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                showPopup(e);
+            }
+ 
+            private void showPopup(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    popup.show(e.getComponent(),
+                            e.getX(), e.getY());
+                }
+            }
+        });
+		
+		textField_Origen.addMouseListener(new MouseAdapter() {
+			 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                showPopup(e);
+            }
+ 
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                showPopup(e);
+            }
+ 
+            private void showPopup(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    popup.show(e.getComponent(),
+                            e.getX(), e.getY());
+                }
+            }
+        });
+		
+		textField_General.addMouseListener(new MouseAdapter() {
+			 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                showPopup(e);
+            }
+ 
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                showPopup(e);
+            }
+ 
+            private void showPopup(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    popup.show(e.getComponent(),
+                            e.getX(), e.getY());
+                }
+            }
+        });
+		
+		textField_IP.addMouseListener(new MouseAdapter() {
+			 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                showPopup(e);
+            }
+ 
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                showPopup(e);
+            }
+ 
+            private void showPopup(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    popup.show(e.getComponent(),
+                            e.getX(), e.getY());
+                }
+            }
+        });
+		
 		JButton btnGuardar = new JButton("Guardar");
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 0, 5);
@@ -283,6 +382,26 @@ public class GestionEscaner extends JPanel {
 		
 	}
 	
+	private JPopupMenu getPopUpMenu() {
+		JPopupMenu menu = new JPopupMenu();
+
+		menu.add(crearNuevoMenuItem(new DefaultEditorKit.CopyAction(),"Copiar", KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+		menu.addSeparator();
+		menu.add(crearNuevoMenuItem(new DefaultEditorKit.CutAction(),"Cortar", KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+		menu.addSeparator();
+		menu.add(crearNuevoMenuItem(new DefaultEditorKit.PasteAction(),"Pegar", KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+		
+		return menu;
+	}
+	
+	private JMenuItem crearNuevoMenuItem (Action accion, String titulo,KeyStroke atajoTeclado) {
+        JMenuItem item = new JMenuItem(accion);
+        item.setText(titulo);
+        item.setAccelerator(atajoTeclado);
+        
+        return item;
+	}
+
 	public void generarRevisor() {
 		
 		archivoRevisor = new File(this.rutaGeneral+"\\revisor.bat");
@@ -522,7 +641,7 @@ public class GestionEscaner extends JPanel {
 			this.directorioDestino=""+jfileChooser.getSelectedFile().getAbsoluteFile();
 			
 		}
-	
+		
 	}
 	
 }
